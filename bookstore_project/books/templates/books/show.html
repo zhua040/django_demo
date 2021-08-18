@@ -28,15 +28,34 @@
 
 
         <div class = 'mt-10'>
-            <h2 class="text-3xl">Author</h2>
-            <p class="text-gray-600 mt-5">{{book.authors|join:", " }}</p>
+            <h2 class="text-3xl">Author</h2>  
+            <p class="text-gray-600 mt-5">{{book.authors}}</p>
         </div>
         
         <div class = 'mt-10'>
             <h2 class="text-3xl">Description</h2>
             <p class="text-gray-600 mt-5">{{book.longDescription}}</p>
         </div>
-        
+        <br>
+        <br>
+        <form method="POST" action="{% url 'book.review' book.id %}">
+            {% csrf_token %}
+            <textarea 
+            class ="border rounded p-2 w-full"
+            name="review"
+            placeholder="Write your review here"
+            rows="7"></textarea>
+            <button
+            type="submit"
+            class="float-right border rounded p-2 bg-gray-800 text-white">Submit</button>
+        </div>
+        <br>
+
+        <div class="mt-10">
+            {% for review in reviews %}
+            <p>{{review.body}}</p>
+            {% endfor %}
+        </div>
        
     </section>
     
